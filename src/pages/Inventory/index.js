@@ -4,7 +4,7 @@ import React from "react";
 function Inventory() {
   return (
     <div>
-      <Typography.Text>Inventory</Typography.Text>
+      <Typography.Text level={4}>Inventory</Typography.Text>
     </div>
   );
 }
