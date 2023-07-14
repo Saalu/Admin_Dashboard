@@ -4,7 +4,7 @@ import React from "react";
 function Orders() {
   return (
     <div>
-      <Typography.Text>Orders</Typography.Text>
+      <Typography.Text level={4}>Orders</Typography.Text>
     </div>
   );
 }
