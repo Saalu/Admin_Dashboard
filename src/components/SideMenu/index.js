@@ -29,13 +29,13 @@ function SideMenu() {
           },
           {
             label: "Orders",
-            key: "/orders",
             icon: <ShoppingCartOutlined />,
+            key: "/orders",
           },
           {
             label: "Customers",
-            key: "/customers",
             icon: <UserOutlined />,
+            key: "/customers",
           },
         ]}
       ></Menu>
