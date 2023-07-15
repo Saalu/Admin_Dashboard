@@ -10,3 +10,6 @@ export const getInventory = () => {
   return fetch("https://dummyjson.com/products").then((res) => res.json());
   // .then((json) => console.log(json));
 };
+export const getCustomers = () => {
+  return fetch("https://dummyjson.com/users").then((res) => res.json());
+};
