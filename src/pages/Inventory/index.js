@@ -55,22 +55,18 @@ function RecentInventory() {
             render: (value) => <span>${value}</span>,
           },
           {
-            title: "Brand",
-            dataIndex: "brand",
-            key: "brand",
-          },
-          {
-            title: "Stock",
-            dataIndex: "stock",
-            key: "stock",
-          },
-          {
             title: "Rating",
             dataIndex: "rating",
             key: "rating",
             render: (rating) => {
               return <Rate value={rating} allowHalf disabled />;
             },
+          },
+
+          {
+            title: "Brand",
+            dataIndex: "brand",
+            key: "brand",
           },
         ]}
         loading={loading}
