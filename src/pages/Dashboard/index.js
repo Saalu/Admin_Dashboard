@@ -122,14 +122,13 @@ function RecentOrders() {
     setLoading(true);
     getOrders().then((res) => {
       setDataSource(res.products.splice(0, 4));
-      console.log({ data: res.products });
       setLoading(false);
     });
   }, []);
 
   return (
     <>
-      <Typography.Text>Recent Orders</Typography.Text>
+      <Typography.Title level={5}>Recent Orders</Typography.Title>
       <Table
         columns={[
           {
@@ -146,6 +145,7 @@ function RecentOrders() {
             title: "Price",
             dataIndex: "discountedPrice",
             key: "discountedPrice",
+            render: (value) => <span>${value}</span>,
           },
           // {
           //   title: "Brand",
