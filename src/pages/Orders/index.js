@@ -1,4 +1,4 @@
-import { Typography } from "antd";
+import { Typography, Space, Table } from "antd";
 import React from "react";
 
 function Orders() {
