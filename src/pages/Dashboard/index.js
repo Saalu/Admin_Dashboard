@@ -6,7 +6,7 @@ import {
   UserOutlined,
   DollarCircleOutlined,
 } from "@ant-design/icons";
-import { getOrders, getRevenue } from "../../api";
+import { getCustomers, getInventory, getOrders, getRevenue } from "../../api";
 
 import {
   Chart as ChartJS,
@@ -29,13 +29,31 @@ ChartJS.register(
 );
 
 function Dashboard() {
+  const [orders, setOrders] = useState(0);
+  const [inventory, setInventory] = useState(0);
+  const [customers, setCustomers] = useState(0);
+  const [revenue, setRevenue] = useState(0);
+
+  useEffect(() => {
+    getOrders().then((res) => {
+      setOrders(res.total);
+      setRevenue(res.discountedTotal);
+    });
+    getInventory().then((res) => {
+      setInventory(res.total);
+    });
+    getCustomers().then((res) => {
+      setCustomers(res.total);
+    });
+  }, []);
+
   return (
     <Space size={20} direction="vertical">
       <Typography.Title level={4}>Dashboard</Typography.Title>
       <Space direction="horizontal">
         <DashboardCard
           title={"Orders"}
-          value={12345}
+          value={orders}
           icon={
             <ShoppingCartOutlined
               style={{
@@ -50,7 +68,7 @@ function Dashboard() {
         />
         <DashboardCard
           title={"Inventory"}
-          value={12345}
+          value={inventory}
           icon={
             <ShoppingOutlined
               style={{
@@ -65,7 +83,7 @@ function Dashboard() {
         />
         <DashboardCard
           title={"Customers"}
-          value={12345}
+          value={customers}
           icon={
             <UserOutlined
               style={{
@@ -81,7 +99,7 @@ function Dashboard() {
 
         <DashboardCard
           title={"Revenue"}
-          value={12345}
+          value={revenue}
           icon={
             <DollarCircleOutlined
               style={{
@@ -95,9 +113,13 @@ function Dashboard() {
           }
         />
       </Space>
-      <Space>
-        <RecentOrders />
-        <DashboardChart />
+      <Space direction="horizontal">
+        <Space>
+          <RecentOrders />
+        </Space>
+        <Space>
+          <DashboardChart />
+        </Space>
       </Space>
     </Space>
   );
@@ -147,15 +169,10 @@ function RecentOrders() {
             key: "discountedPrice",
             render: (value) => <span>${value}</span>,
           },
-          // {
-          //   title: "Brand",
-          //   dataIndex: "brand",
-          //   key: "brand",
-          // },
         ]}
         loading={loading}
         dataSource={dataSource}
-        pagination={false}
+        pagination={{ pageSize: 3 }}
       />
     </>
   );
@@ -204,7 +221,7 @@ function DashboardChart() {
   };
 
   return (
-    <Card style={{ width: 500, height: 250 }}>
+    <Card style={{ width: 600, height: 300 }}>
       <Bar options={options} data={revenueData} />
     </Card>
   );
